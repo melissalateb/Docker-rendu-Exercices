@@ -19,7 +19,9 @@ def write_own_address_to_file():
 def ping():
     try:
         # Attend une demi-seconde avant d'envoyer une requête "pong" vers le serveur 1
-        requests.get(f'{SERVER1_URL}/pong', timeout=0.5)
+        print('Received Ping from Server 1')
+        time.sleep(0.5)
+        requests.get(f'{SERVER1_URL}/pong')
         return 'Pong sent!'
     
     except requests.RequestException as e:
