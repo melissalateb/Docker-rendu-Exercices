@@ -1,23 +1,23 @@
-import threading
-from flask import Flask
+from flask import Flask, request
 import requests
 import time
-import Server2
+from threading import Thread
 
 app = Flask(__name__)
-
 server2_url = "http://localhost:5372"
 
 def send_pong():
-    response = requests.get(f"{server2_url}/ping")
-    print(f"Received Ping from Server 2: {response.text}")
-    time.sleep(0.5)
-    Server2.send_ping()
+    requests.get(server2_url + "/pong")
 
-@app.route('/pong', methods=['GET'])
+def handle_ping():
+    time.sleep(0.5)
+    send_pong()
+
+@app.route('/ping')
 def ping():
-    return "Pong from Server 1"
+    thread = Thread(target=handle_ping)
+    thread.start()
+    return 'Ping received!'
 
 if __name__ == '__main__':
-    threading.Thread(target=send_pong).start()
-    app.run(host='localhost', port=4567)
+    app.run(port=4567)
