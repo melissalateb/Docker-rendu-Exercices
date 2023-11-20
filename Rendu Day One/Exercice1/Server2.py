@@ -10,8 +10,7 @@ SERVER1_URL = 'http://localhost:4567'
 def ping():
     try:
         # Attend une demi-seconde avant d'envoyer une requête "pong" vers le serveur 1
-        
-        requests.get(f'{SERVER1_URL}/pong', timeout=0.1)
+        requests.get(f'{SERVER1_URL}/pong')
         return 'Pong sent!'
     
     except requests.RequestException as e:
