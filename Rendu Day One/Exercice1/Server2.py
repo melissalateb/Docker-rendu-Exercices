@@ -10,6 +10,8 @@ SERVER1_URL = 'http://localhost:4567'
 def ping():
     try:
         # Attend une demi-seconde avant d'envoyer une requête "pong" vers le serveur 1
+        print('Received Ping from Server 1')
+        time.sleep(0.5)
         requests.get(f'{SERVER1_URL}/pong')
         return 'Pong sent!'
     

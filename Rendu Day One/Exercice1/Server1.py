@@ -9,10 +9,9 @@ SERVER2_URL = 'http://localhost:5372'
 @app.route('/pong')
 def ping_pong():
     try:
-        # Envoie une requête "pong" vers le serveur 2
-        # time.sleep(0.5)
-        requests.get(f'{SERVER2_URL}/ping', timeout=0.5)
-        # requests.get(f'{SERVER2_URL}/ping')
+        print('Received Ping from Server 2')
+        time.sleep(0.5)  # Simulate some processing time
+        requests.get(f'{SERVER2_URL}/pong') 
         return 'Ping successful!'
     except requests.RequestException as e:
         return f'Error communicating with Server 2: {str(e)}', 500
