@@ -6,17 +6,19 @@ from threading import Thread
 app = Flask(__name__)
 server_ping_url = "http://127.0.0.1:5372"
 server_3_url = "http://127.0.0.1:8080"
+# server_ping_url = "http://ping-service:5372"
+# server_3_url = "http://coordinate-service:8080"
 
 def send_ping():
     while True:
         time.sleep(0.5)
         try:
-            response = requests.get(server_ping_url + "/ping", timeout=5)
+            response = requests.get(server_ping_url + "/", timeout=5)
             print("Server Ping received ping from Server Pong:", response.text)
         except requests.exceptions.RequestException as e:
             print("Error sending ping:", e)
 
-@app.route('/pong')
+@app.route('/')
 def pong():
     return "pong"
 

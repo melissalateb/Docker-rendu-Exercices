@@ -6,12 +6,13 @@ from threading import Thread
 app = Flask(__name__)
 server_pong_url = "http://127.0.0.1:4567"
 server_3_url = "http://127.0.0.1:8080"
-
+# server_pong_url = "http://ping-service:4567"
+# server_3_url = "http://coordinate-service:8080"
 def send_pong():
     while True:
         time.sleep(0.5)
         try:
-            response = requests.get(server_pong_url + "/pong", timeout=5)  # Définissez un timeout approprié
+            response = requests.get(server_pong_url + "/", timeout=5)  # Définissez un timeout approprié
             if response.status_code == 200:
                 print("Server Pong received ping from Server Ping:", response.text)
             else:
@@ -19,7 +20,7 @@ def send_pong():
         except requests.exceptions.RequestException as e:
             print("Error sending pong:", e)
 
-@app.route('/ping')
+@app.route('/')
 def ping():
     return "ping"
 
@@ -34,6 +35,7 @@ def send_address():
         return "Error sending address"
 
 if __name__ == '__main__':
+    
     pong_thread = Thread(target=send_pong)
     pong_thread.start()
     

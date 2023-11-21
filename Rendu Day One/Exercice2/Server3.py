@@ -1,3 +1,4 @@
+import time
 from flask import Flask, request
 import json
 
@@ -20,4 +21,5 @@ def get_server_addresses():
     return json.dumps(server_addresses)
 
 if __name__ == '__main__':
+    time.sleep(10)
     app.run(port=8080)
