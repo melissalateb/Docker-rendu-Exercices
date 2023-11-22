@@ -27,6 +27,17 @@ services:
     depends_on:
       - ping-service
 
+  coordinate-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-coordinate
+    ports:
+      - "7108:8080"
+    networks:
+      - alpine-net
+    container_name: coordinate-container
+    command: ["python", "-u", "Server3.py"]
+    
 networks:
   alpine-net:
     driver: bridge

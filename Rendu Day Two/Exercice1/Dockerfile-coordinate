@@ -1,0 +1,17 @@
+# Utilisez une image Python officielle comme image parent
+FROM python:3.8-slim
+
+# Définit le répertoire de travail comme /app
+WORKDIR /app
+
+# Copie le contenu du répertoire source dans le conteneur à /app
+COPY . /app
+
+# Installe les packages nécessaires spécifiés dans requirements.txt
+RUN pip install Flask
+
+# Expose le port 8080 vers l'extérieur du conteneur
+EXPOSE 8080
+
+# Commande à exécuter lors du lancement du conteneur
+CMD ["python", "-u", "Server3.py"]
