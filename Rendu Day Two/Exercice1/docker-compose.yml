@@ -1,33 +1,35 @@
 version: '3'
 
 services:
-  ping-service:
+  server1-container:
     build:
       context: .
       dockerfile: Dockerfile-server1
-    ports:
-      - "7100:4567"
+    # ports:
+    #   - "7100:4567"
+    scale: 3
     networks:
       - alpine-net
-    container_name: server1-container
+    # container_name: server1-container
     command: ["python", "-u", "Server1.py"]
     depends_on:
       - coordinate-service
 
 
 
-  pong-service:
+  server2-container:
     build:
       context: .
       dockerfile: Dockerfile-server2
-    ports:
-      - "7106:5372"
+    # ports:
+    #   - "7106:5372"
+    scale: 3
     networks:
       - alpine-net
-    container_name: server2-container
+    # container_name: server2-container
     command: ["python", "-u", "Server2.py"]
     depends_on:
-      - ping-service
+      - coordinate-service
 
   coordinate-service:
     build:
