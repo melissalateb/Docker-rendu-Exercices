@@ -40,16 +40,18 @@ services:
     container_name: coordinate-container
     command: ["python", "-u", "Server3.py"]
   
-  # message-broker:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile-message-brocker
-  #   ports:
-  #     - "8090:8090"
-  #   networks:
-  #     - alpine-net
-  #   container_name: message-brocker-container
-  #   command: ["python", "-u", "Server4.py"]
+  message-broker:
+    build:
+      context: .
+      dockerfile: Dockerfile-message-brocker
+    ports:
+      - "8090:8090"
+    networks:
+      - alpine-net
+    container_name: message-brocker-container
+    command: ["python", "-u", "Server4.py"]
+    depends_on:
+      - coordinate-service
 
 networks:
   alpine-net:
